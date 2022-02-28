@@ -1,28 +1,28 @@
 #include <iostream>
 using namespace std;
 
-int partition(int arr[], int p, int r){
-    int x = arr[r];
-    int i = p - 1;
+int partition(int arr[], int p, int r){ // this is the pivot function that will rearrange the subarray in place
+    int x = arr[r]; // pivots end of array
+    int i = p - 1; // index of smaller elem
     for(int j = p; j <= r-1; j++){
-        if(arr[j] <= x){
+        if(arr[j] <= x){ // if the current element is smaller than the pivot we increment the index of smaller element
             i++;
-            int temp = arr[i];
+            int temp = arr[i]; // swap smaller element with current element
             arr[i] = arr[j];
             arr[j] = temp;
         }
     }
-    int temp = arr[i+1];
+    int temp = arr[i+1]; // swap right of smaller element index and the right of it
     arr[i+1] = arr[r];
     arr[r] = temp;
     return i+1;
 }
 
-void quickSort(int arr[], int p, int r){
-    if(p < r){
-        int q = partition(arr, p, r);
-        quickSort(arr, p, q-1);
-        quickSort(arr, q+1, r);
+void quickSort(int arr[], int p, int r){ 
+    if(p < r){ // once p isnt < r, recursive stops
+        int q = partition(arr, p, r); // index of partition
+        quickSort(arr, p, q-1); // recursivly sorts bottom half
+        quickSort(arr, q+1, r); // recursivly sorts upper half
     }
 }
 
